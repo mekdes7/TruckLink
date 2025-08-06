@@ -1,5 +1,5 @@
 import Manager from '../Model/managerModel.js';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 export const registerManager = async (req, res) => {
   const { email, password } = req.body;

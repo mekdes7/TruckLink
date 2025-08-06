@@ -1,5 +1,5 @@
 import Driver from '../Model/driverModel.js';
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 
 export const registerDriver = async (req, res) => {
   const { email, password } = req.body;
