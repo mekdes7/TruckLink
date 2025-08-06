@@ -4,11 +4,27 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
-function authenticateDriver({ email, password }: { email: string; password: string }) {
-  if (!email || !password) return false;
-  localStorage.setItem("driver_logged_in", "1");
-  return true;
+async function authenticateDriver({ email, password }: { email: string; password: string }) {
+  try {
+    const res = await fetch("http://localhost:2001/api/driver/driverLogin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Login failed");
+
+    localStorage.setItem("Driver logged in", "1");
+    localStorage.setItem("driver_email", data.driver?.email || "");
+
+    return true;
+  } catch (error: any) {
+    toast({ title: "Login Error", description: error.message, variant: "destructive" });
+    return false;
+  }
 }
+
 
 const DriverLogin = () => {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -19,36 +35,38 @@ const DriverLogin = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const formErrors: typeof errors = {};
-    if (!form.email) formErrors.email = "Email is required";
-    if (!form.password) formErrors.password = "Password is required";
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  const formErrors: typeof errors = {};
+  if (!form.email) formErrors.email = "Email is required";
+  if (!form.password) formErrors.password = "Password is required";
 
-    setErrors(formErrors);
-    if (Object.keys(formErrors).length > 0) return;
+  setErrors(formErrors);
+  if (Object.keys(formErrors).length > 0) return;
 
-    if (authenticateDriver(form)) {
-      toast({ title: "Login Successful", description: "Welcome, Driver!" });
-      navigate("/driver/dashboard");
-    } else {
-      toast({ title: "Login Failed", description: "Invalid credentials", variant: "destructive" });
-    }
-  };
+  const success = await authenticateDriver(form);
+  if (success) {
+    toast({ title: "Login Successful", description: "Welcome, Driver!" });
+    navigate("/driver/dashboard");
+  } else {
+    toast({ title: "Login Failed", description: "Invalid credentials", variant: "destructive" });
+  }
+};
+
 
   return (
     <main className="min-h-screen w-full bg-gradient-to-br from-white via-blue-300 to-white flex flex-col items-center justify-center px-6 py-10 animate-fade-in font-sans text-black">
-      {/* Logo */}
+    
       <div className="mb-10 flex justify-center">
         <img
-          src="/TruckLink_Logo.jpeg"
+          src="/TruckLink_Logo.jpg"
           alt="TruckLink logo"
-          className="h-20 w-28 object-contain rounded-2xl shadow-lg"
+          className="h-20 w-25 object-contain rounded-2xl shadow-lg"
           draggable={false}
         />
       </div>
 
-      {/* Card */}
+    
       <section className="w-full max-w-sm bg-white/30 rounded-3xl shadow-2xl backdrop-blur-md p-8 space-y-8 border border-white/40">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-extrabold drop-shadow-md">Driver Login</h1>
@@ -124,7 +142,7 @@ const DriverLogin = () => {
           </p>
           <p>
             <Link
-              to="/"
+              to="/manager/login"
               className="underline text-black/60 text-xs hover:text-black"
             >
               Login as Manager

@@ -98,7 +98,7 @@ export default function DriverDashboard() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-white via-blue-300 to-white p-6 flex flex-col items-center font-sans text-black animate-fade-in">
       <header className="w-full max-w-md flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-extrabold drop-shadow-lg tracking-tight">🚛 Driver Dashboard</h1>
+        <h1 className="text-3xl font-extrabold drop-shadow-lg tracking-tight"> Driver Dashboard</h1>
         <Button
           onClick={handleReset}
           className="text-sm text-indigo-900 rounded-full border border-white/50 bg-white/30 hover:bg-white/50 shadow-md px-4 py-1 transition focus:outline-none focus:ring-2 focus:ring-indigo-400"

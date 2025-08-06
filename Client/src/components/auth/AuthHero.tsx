@@ -16,11 +16,11 @@ const iconMap = {
 
 const imageMap = {
   manager:
-    "/TruckLink_Logo.jpeg",
+    "/TruckLink_Logo.jpg",
   driver:
-    "/TruckLink_Logo.jpeg",
+    "/TruckLink_Logo.jpg",
   default:
-    "/TruckLink_Logo.jpeg",
+    "/TruckLink_Logo.jpg",
 };
 
 export default function AuthHero({ title, subtitle, icon }: AuthHeroProps) {

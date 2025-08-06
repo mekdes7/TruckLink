@@ -9,7 +9,7 @@ const HeroBanner = () => (
     <div className="flex items-center gap-6">
       <div className="relative">
         <img
-          src="/TruckLink_Logo.jpeg"
+          src="/TruckLink_Logo.jpg"
           alt="TruckLink"
           className="h-28 w-28 object-cover rounded-3xl shadow-2xl border-4 border-cyan-50"
           draggable={false}
@@ -32,7 +32,7 @@ const HeroBanner = () => (
     {/* Illustration right */}
     <div className="hidden lg:block relative">
       <img
-        src="/TruckLink_Logo.jpeg"
+        src="/TruckLink_Logo.jpg"
         alt="Logistics"
         className="h-36 rounded-3xl shadow-2xl object-cover border-4 border-cyan-50 blur-[0.5px]"
         draggable={false}

@@ -12,7 +12,6 @@ const CATEGORIES = [
   "Transmission",
 ];
 
-// Simulate localStorage reporting
 const getReports = () => {
   try {
     const reports = localStorage.getItem("maintenance_reports");

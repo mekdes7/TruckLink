@@ -4,11 +4,28 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
-function authenticateLogisticsManager({ email, password }: { email: string; password: string }) {
-  if (!email || !password) return false;
-  localStorage.setItem("logistics_manager_logged_in", "1");
-  return true;
+async function authenticateLogisticsManager({ email, password }: { email: string; password: string }) {
+  try {
+    const res = await fetch("http://localhost:2001/api/manager/managerLogin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.message || "Login failed");
+
+    
+    localStorage.setItem("logistics_manager_logged_in", "1");
+    localStorage.setItem("manager_email", data.manager?.email || "");
+
+    return true;
+  } catch (error: any) {
+    toast({ title: "Login Error", description: error.message, variant: "destructive" });
+    return false;
+  }
 }
+
 
 export default function LogisticsManagerLogin() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -19,42 +36,40 @@ export default function LogisticsManagerLogin() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const validationErrors: typeof errors = {};
-    if (!form.email) validationErrors.email = "Email is required";
-    if (!form.password) validationErrors.password = "Password is required";
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  const validationErrors: typeof errors = {};
+  if (!form.email) validationErrors.email = "Email is required";
+  if (!form.password) validationErrors.password = "Password is required";
 
-    setErrors(validationErrors);
-    if (Object.keys(validationErrors).length) return;
+  setErrors(validationErrors);
+  if (Object.keys(validationErrors).length) return;
 
-    if (authenticateLogisticsManager(form)) {
-      toast({ title: "Welcome back!", description: "You’re logged in as Logistics Manager." });
-      navigate("/");
-    } else {
-      toast({ title: "Login failed", description: "Please check your credentials.", variant: "destructive" });
-    }
-  };
+  const success = await authenticateLogisticsManager(form);
+  if (success) {
+    toast({ title: "Welcome back!", description: "You’re logged in as Logistics Manager." });
+    navigate("/manager/dashboard");
+  }
+};
+
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-blue-50 via-cyan-50 to-blue-100 px-6 py-12 font-sans">
       <section className="w-full max-w-md bg-white rounded-3xl shadow-lg p-10 sm:p-12 animate-fade-in">
-        {/* Logo */}
+      
         <div className="flex justify-center mb-6">
           <img
-            src="/TruckLink_Logo.jpeg"
+            src="/TruckLink_Logo.jpg"
             alt="TruckLink Logo"
             className="h-16 w-auto object-contain select-none"
             draggable={false}
           />
         </div>
 
-        {/* Heading */}
         <h1 className="text-3xl font-semibold text-gray-900 mb-8 text-center">
           Logistics Manager Login
         </h1>
 
-        {/* Form */}
         <form className="space-y-6" onSubmit={handleSubmit} noValidate>
           <div>
             <Input
@@ -93,11 +108,10 @@ export default function LogisticsManagerLogin() {
           </Button>
         </form>
 
-        {/* Footer Links */}
         <div className="mt-6 text-center text-sm text-gray-700">
           Don&apos;t have an account?{" "}
           <Link
-            to="/"
+            to="/manager/signup"
             className="underline text-blue-600 hover:text-blue-800 font-medium transition-colors"
           >
             Sign up

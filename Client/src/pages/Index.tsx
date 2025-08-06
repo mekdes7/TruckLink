@@ -2,28 +2,24 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const roles = [
-  { title: "🚚 Driver", url: "/driver/signup" },
-  { title: "📦 Logistics Manager", url: "/" },
+  { title: " Driver", url: "/driver/signup" },
+  { title: "Logistics Manager", url: "/manager/login" },
 ];
 
-/**
- * Landing page styled like DriverFeedback page
- */
 export default function Landing() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-300 to-white p-6 font-sans text-black">
       <section className="w-full max-w-sm bg-white/25 backdrop-blur-md rounded-3xl border border-white/30 shadow-lg p-8 space-y-8 animate-fade-in">
-        {/* Logo */}
+    
         <div className="flex justify-center">
           <img
-            src="/TruckLink_Logo.jpeg"
+            src="/TruckLink_Logo.jpg"
             alt="TruckLink logo"
-            className="h-20 w-28 object-contain rounded-lg shadow-md"
+            className="h-20 w-25 object-contain rounded-lg shadow-md"
             draggable={false}
           />
         </div>
 
-        {/* Title */}
         <div className="text-center">
           <h1 className="text-4xl font-extrabold drop-shadow-md tracking-tight">
             TruckLink
@@ -33,7 +29,6 @@ export default function Landing() {
           </p>
         </div>
 
-        {/* CTA */}
         <div className="text-center">
           <p className="text-xs text-black/70 mb-5 italic">Select your role</p>
           <div className="flex flex-col gap-4">
@@ -49,7 +44,6 @@ export default function Landing() {
           </div>
         </div>
 
-        {/* Footer */}
         <footer className="text-center text-[10px] text-black/50 pt-6 border-t border-white/30 select-none">
           © 2025 TruckLink. Built for the road.
         </footer>

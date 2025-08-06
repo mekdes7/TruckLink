@@ -16,7 +16,7 @@ const NotFound = () => {
       {/* Logo */}
       <div className="mb-8">
         <img
-          src="/TruckLink_Logo.jpeg"
+          src="/TruckLink_Logo.jpg"
           alt="TruckLink Logo"
           className="h-20 w-auto object-contain select-none"
           draggable={false}

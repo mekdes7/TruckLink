@@ -8,7 +8,6 @@ import JobsTable from "@/components/manager/JobsTable";
 import DriversTable from "@/components/manager/DriversTable";
 import PaymentsTable from "@/components/manager/PaymentsTable";
 import JobHistoryTable from "@/components/manager/JobHistoryTable";
-import PaymentCenterInfo from "@/components/manager/PaymentCenterInfo";
 
 const ManagerDashboard = () => {
   const [{ drivers, jobs, jobHistory }, setState] = useState(() => {
@@ -22,7 +21,6 @@ const ManagerDashboard = () => {
     };
   });
 
-  // Analytics derived data
   const completedCount = jobHistory.length;
   const inProgressCount = jobs.filter(j => j.status === "Assigned").length;
   const availableCount = jobs.filter(j => j.status === "Available").length;
@@ -35,7 +33,6 @@ const ManagerDashboard = () => {
     localStorage.setItem("manager_jobs_history", JSON.stringify(jobHistory));
   }, [drivers, jobs, jobHistory]);
 
-  // Post Job Form State & Handlers
   const [form, setForm] = useState({ origin: "", destination: "", truckType: "", pay: "" });
   const [error, setError] = useState("");
 
@@ -69,10 +66,10 @@ const ManagerDashboard = () => {
     <div className="flex bg-gradient-to-tr from-blue-50 via-cyan-50 to-blue-50/80 font-sans min-h-screen">
       <ManagerSidebar />
       <main className="flex-1 flex flex-col px-6 py-9 overflow-auto">
-        {/* Removed max-width and centering to avoid pushing content away from sidebar */}
+     
         <HeroBanner />
 
-        {/* Analytics Cards */}
+       
         <section className="mb-10 rounded-3xl bg-white shadow-lg p-10 animate-fade-in">
           <DashboardAnalytics
             jobsCount={jobs.length + jobHistory.length}
@@ -126,8 +123,6 @@ const ManagerDashboard = () => {
             }}
           />
         </section>
-
-        <PaymentCenterInfo />
 
         {/* Job History */}
         <h2 className="text-3xl font-bold text-blue-700 mb-6 mt-10">Job History (Last 8)</h2>

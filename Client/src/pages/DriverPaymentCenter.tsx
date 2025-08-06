@@ -18,7 +18,6 @@ const DriverPaymentCenter = () => {
     setJobHistory(getJobHistory());
   }, []);
 
-  // Parse pay strings like "$1,100" to numbers
   const earnings = jobHistory
     ? jobHistory.reduce((sum, job) => {
         const payNumber = Number(job.pay?.replace(/[^0-9.-]+/g, ""));
@@ -29,7 +28,7 @@ const DriverPaymentCenter = () => {
   return (
     <main className="min-h-screen bg-gradient-to-br from-white via-blue-300 to-white p-6 flex flex-col items-center font-sans text-black">
       <div className="w-full max-w-3xl">
-        <h1 className="text-3xl font-extrabold mb-8 drop-shadow-md px-2 text-center">💰 Payment Center (Simulation Only)</h1>
+        <h1 className="text-3xl font-extrabold mb-8 drop-shadow-md px-2 text-center">💰 Payment Center</h1>
 
         <Card className="mb-8 rounded-3xl shadow-2xl border border-white/30 backdrop-blur-md bg-white/25 animate-fade-in">
           <CardHeader>
@@ -86,10 +85,6 @@ const DriverPaymentCenter = () => {
             )}
           </CardContent>
         </Card>
-
-        <p className="text-black/60 text-center text-xs mt-6 px-2">
-          All payment data is simulation only.
-        </p>
       </div>
     </main>
   );

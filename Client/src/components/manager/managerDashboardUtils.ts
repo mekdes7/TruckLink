@@ -1,9 +1,9 @@
 
 export const PLACEHOLDER_IMAGES = [
-  "/TruckLink_Logo.jpeg",
-  "/TruckLink_Logo.jpeg",
-  "/TruckLink_Logo.jpeg",
-  "/TruckLink_Logo.jpeg"
+  "/TruckLink_Logo.jpg",
+  "/TruckLink_Logo.jpg",
+  "/TruckLink_Logo.jpg",
+  "/TruckLink_Logo.jpg"
 ];
 
 // Helper to pick an image for a job or driver (using id to vary)
