@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 2000;
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from React build folder
+
 app.use(express.static(path.join(__dirname, 'Client', 'build')));
 
 
