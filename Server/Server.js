@@ -31,6 +31,12 @@ app.get('/*', (req, res) => {
 
 
 dbConfig.connect();
+app._router.stack.forEach((middleware) => {
+  if (middleware.route) {
+    console.log(middleware.route.path);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
