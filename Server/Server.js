@@ -29,6 +29,10 @@ app.use('/api/driver', Driverrouter);
 //   res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
 // });
 
+app.use(cors({
+  origin: 'https://trucklink-1.onrender.com/',
+  credentials: true
+}));
 
 dbConfig.connect();
 

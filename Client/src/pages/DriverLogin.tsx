@@ -6,7 +6,8 @@ import { toast } from "@/hooks/use-toast";
 
 async function authenticateDriver({ email, password }: { email: string; password: string }) {
   try {
-    const res = await fetch("http://localhost:2001/api/driver/driverLogin", {
+    const res = await fetch('https://trucklink.onrender.com/api/driver/driverLogin',
+ {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

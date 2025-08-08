@@ -6,7 +6,7 @@ import { toast } from "@/hooks/use-toast";
 
 async function registerLogisticsManager({ email, password }: { email: string; password: string }) {
   try {
-    const res = await fetch("http://localhost:2001/api/manager/registerManager", {
+    const res = await fetch("//trucklink.onrender.com/api/manager/registerManager", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
