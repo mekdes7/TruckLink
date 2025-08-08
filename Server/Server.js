@@ -2,10 +2,10 @@ import express from 'express';
 import dotenv from 'dotenv';
 import dbConfig from './Config/DbConfig.js';
 import cors from 'cors';
-import Managerrouter from './Routes/managerRouter.js';
-import Driverrouter from './Routes/driverRoutes.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import Managerrouter from './Routes/managerRouter.js';
+import Driverrouter from './Routes/driverRoutes.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -25,18 +25,25 @@ app.use('/api/manager', Managerrouter);
 app.use('/api/driver', Driverrouter);
 
 
-app.get('/*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
 });
 
 
 dbConfig.connect();
-app._router.stack.forEach((middleware) => {
-  if (middleware.route) {
-    console.log(middleware.route.path);
-  }
-});
+
 
 app.listen(PORT, () => {
+  // app._router.stack.forEach((middleware) => {
+  // if (middleware.route) {
+  //   console.log('ROUTE PATH:', middleware.route.path);
+  // } else if (middleware.name === 'router') {
+  //   middleware.handle.stack.forEach((handler) => {
+  //     if (handler.route) {
+  //       console.log('NESTED ROUTE PATH:', handler.route.path);
+  //     }
+  //   });
+  // }
+  // });
   console.log(`Server is running on port ${PORT}`);
-});
+})

@@ -21,15 +21,13 @@ import { ManagerSidebar } from "@/components/ManagerSidebar";
 
 const queryClient = new QueryClient();
 
-// Helper for picking sidebar per route
 function getSidebarComponent(pathname: string) {
   if (pathname.startsWith("/manager")) return <ManagerSidebar />;
   if (pathname.startsWith("/driver")) return <DriverSidebar />;
-  // Default to manager sidebar for "/"
+
   return <ManagerSidebar />;
 }
 
-// Layout wrapper so every page gets sidebar
 function AppLayout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   return (
@@ -51,20 +49,20 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Main index without sidebar */}
+      
           <Route
             path="/"
             element={
               <Index />
             }
           />
-          {/* MANAGER Auth Pages -- NO Sidebar */}
+     
           <Route path="/manager/login" element={<ManagerLogin />} />
           <Route path="/manager/signup" element={<ManagerSignup />} />
-          {/* DRIVER Auth Pages -- NO Sidebar */}
+     
           <Route path="/driver/login" element={<DriverLogin />} />
           <Route path="/driver/signup" element={<DriverSignup />} />
-          {/* Driver App Routes */}
+       
           <Route
             path="/driver/dashboard"
             element={
@@ -97,7 +95,7 @@ const App = () => (
               </AppLayout>
             }
           />
-          {/* Manager App Routes */}
+      
           <Route
             path="/manager/dashboard"
             element={
@@ -114,7 +112,7 @@ const App = () => (
               </AppLayout>
             }
           />
-          {/* Not Found */}
+     
           <Route
             path="*"
             element={
