@@ -3,6 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
+const api = import.meta.env.VITE_API_URL;
+
 
 async function authenticateLogisticsManager({ email, password }: { email: string; password: string }) {
   try {

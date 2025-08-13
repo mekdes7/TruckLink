@@ -1,55 +1,34 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import dbConfig from './Config/DbConfig.js';
-import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import Managerrouter from './Routes/managerRouter.js';
-import Driverrouter from './Routes/driverRoutes.js';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import { PrismaClient } from "@prisma/client";
+import Driverrouter from "./Routes/driverRoutes.js";
+import Managerrouter from "./Routes/managerRouter.js";
 
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 dotenv.config();
+
+const prisma = new PrismaClient();
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const PORT = process.env.PORT || 2000;
 
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '../Client/dist')));
+app.use("/api/driver", Driverrouter);
+app.use("/api/manager", Managerrouter);
 
-
-app.use('/api/manager', Managerrouter);
-app.use('/api/driver', Driverrouter);
-
-
-app.use(express.static(path.join(__dirname, '../Client/dist')));
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../Client/dist/index.html'));
+app.use(express.static(path.join(__dirname, "../Client/dist")));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../Client/dist/index.html"));
 });
 
-
-app.use(cors({
-  origin: 'https://trucklink-1.onrender.com/',
-  credentials: true
-}));
-
-dbConfig.connect();
-
-
 app.listen(PORT, () => {
-  // app._router.stack.forEach((middleware) => {
-  // if (middleware.route) {
-  //   console.log('ROUTE PATH:', middleware.route.path);
-  // } else if (middleware.name === 'router') {
-  //   middleware.handle.stack.forEach((handler) => {
-  //     if (handler.route) {
-  //       console.log('NESTED ROUTE PATH:', handler.route.path);
-  //     }
-  //   });
-  // }
-  // });
-  console.log(`Server is running on port ${PORT}`);
-})
+  console.log(`Server running on port ${PORT}`);
+});
+
+export { prisma };

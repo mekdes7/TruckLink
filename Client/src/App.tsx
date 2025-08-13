@@ -47,82 +47,73 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-      
-          <Route
-            path="/"
-            element={
-              <Index />
-            }
-          />
-     
-          <Route path="/manager/login" element={<ManagerLogin />} />
-          <Route path="/manager/signup" element={<ManagerSignup />} />
-     
-          <Route path="/driver/login" element={<DriverLogin />} />
-          <Route path="/driver/signup" element={<DriverSignup />} />
-       
-          <Route
-            path="/driver/dashboard"
-            element={
-              <AppLayout>
-                <DriverDashboard />
-              </AppLayout>
-            }
-          />
-          <Route
-            path="/driver/payment-center"
-            element={
-              <AppLayout>
-                <DriverPaymentCenter />
-              </AppLayout>
-            }
-          />
-          <Route
-            path="/driver/maintenance"
-            element={
-              <AppLayout>
-                <DriverMaintenance />
-              </AppLayout>
-            }
-          />
-          <Route
-            path="/driver/feedback"
-            element={
-              <AppLayout>
-                <DriverFeedback />
-              </AppLayout>
-            }
-          />
-      
-          <Route
-            path="/manager/dashboard"
-            element={
-              <AppLayout>
-                <ManagerDashboard />
-              </AppLayout>
-            }
-          />
-          <Route
-            path="/manager/payment-center"
-            element={
-              <AppLayout>
-                <ManagerPaymentCenter />
-              </AppLayout>
-            }
-          />
-     
-          <Route
-            path="*"
-            element={
-              <AppLayout>
-                <NotFound />
-              </AppLayout>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/managerLogin" element={<ManagerLogin />} />
+        <Route path="/registerManager" element={<ManagerSignup />} />
+        <Route path="/driverLogin" element={<DriverLogin />} />
+        <Route path="/registerDriver" element={<DriverSignup />} />
+
+        <Route
+          path="/driver/dashboard"
+          element={
+            <AppLayout>
+              <DriverDashboard />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/driver/payment-center"
+          element={
+            <AppLayout>
+              <DriverPaymentCenter />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/driver/maintenance"
+          element={
+            <AppLayout>
+              <DriverMaintenance />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/driver/feedback"
+          element={
+            <AppLayout>
+              <DriverFeedback />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="/manager/dashboard"
+          element={
+            <AppLayout>
+              <ManagerDashboard />
+            </AppLayout>
+          }
+        />
+        <Route
+          path="/manager/payment-center"
+          element={
+            <AppLayout>
+              <ManagerPaymentCenter />
+            </AppLayout>
+          }
+        />
+
+        <Route
+          path="*"
+          element={
+            <AppLayout>
+              <NotFound />
+            </AppLayout>
+          }
+        />
+      </Routes>
     </TooltipProvider>
   </QueryClientProvider>
 );
